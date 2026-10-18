@@ -87,7 +87,7 @@
     "routing-controllers": "^0.10.4",
     "sqlite3": "^5.1.7",
     "typedi": "^0.10.0",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.31"
   },
   "overrides": {
     "cookie": "0.7.0",
