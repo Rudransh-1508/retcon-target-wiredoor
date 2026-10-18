@@ -1,0 +1,14 @@
+.env
+/public
+dist
+*.sqlite
+# IDE specific files
+.idea/
+.vscode/
+docker/.env
+
+# Locally installed dependencies
+/node_modules/
+/log/
+
+*.log

@@ -1,0 +1,44 @@
+# Wiredoor Configuration
+
+Wiredoor is configured through environment variables passed to the container (e.g. via `docker-compose.yml`).
+This page describes all available configuration options.
+
+---
+
+## Advanced Environment Variables
+
+| Variable | Description | Required | Example |
+|----------|-------------|----------|---------|
+| `PRIVATE_KEY` | Private key to issue tokens, auto-generated for each environment by default |  ❌ Optional | `htcVZnbD7yp8+z1R3vb6ww...gNrKNc/C7fkbHwBbw6uzIX61wLzlYg==` |
+| `SERVER_LOGS_DIR` | Custom directory to store nginx logs inside the container | ❌ Optional | `/var/log/nginx` |
+---
+
+## Volumes
+
+| Container Path | Purpose | Example Host Mapping |
+|----------------|---------|----------------------|
+| `/data` | Persistent configuration and runtime data | `./wiredoor-data` |
+| `/etc/letsencrypt` | Stores Let's Encrypt SSL certificates | `./wiredoor-certbot` |
+| `/var/log/nginx` | (Optional) Stores NGINX access logs | `./wiredoor-logs` |
+
+---
+
+## Network Ports
+
+| Port | Protocol | Purpose |
+|------|----------|---------|
+| `80` | TCP | HTTP traffic (used for Certbot validation) |
+| `443` | TCP | HTTPS traffic |
+| `51820` (default) | UDP | WireGuard VPN connection |
+| `32760-32767` (optional) | TCP | Port range for exposing TCP services (controlled via `TCP_SERVICES_PORT_RANGE`) |
+
+You can change the VPN port or the TCP service range, but make sure those ports are **open and accessible** from the internet or from the client network.
+
+---
+
+## Security Notes
+
+- ⚠️ **Never expose your `.env` or `docker-compose.yml` with secrets in public repositories.**
+- ✅ Use a `.env` file to define your environment variables securely.
+- 📁 Make sure to add `.env` to your `.gitignore` and restrict read access to it using filesystem permissions (e.g., `chmod 600 .env`).
+- 🔒 Avoid hardcoding secrets or tokens in version-controlled files.
