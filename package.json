@@ -92,6 +92,7 @@
   "overrides": {
     "cookie": "0.7.0",
     "cross-spawn": "7.0.5",
-    "multer": "^2.0.1"
+    "multer": "^2.0.1",
+    "picomatch@2.3.1": "2.3.2"
   }
 }
